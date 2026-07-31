@@ -19,7 +19,13 @@ public class RpcClient : IAsyncDisposable
 
     public RpcClient()
     {
-        _connectionFactory = new ConnectionFactory { HostName = "localhost" };
+        _connectionFactory = new ConnectionFactory
+        {
+            HostName = "localhost",
+            Port = 5672,
+            UserName = "user",
+            Password = "password"
+        };
     }
 
     public async Task StartAsync()

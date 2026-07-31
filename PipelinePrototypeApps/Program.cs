@@ -30,8 +30,8 @@ public class Program
                 pattern: "{controller=Home}/{action=Index}/{id?}")
             .WithStaticAssets();
 
+        _ = WorkSaturn.InvokeAsyncWork();
+        
         app.Run();
-
-        WorkSaturn.InvokeAsyncWork().GetAwaiter().GetResult();
     }
 }

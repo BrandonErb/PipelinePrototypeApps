@@ -8,7 +8,7 @@ public static class WorkSaturn
         var rpcClient = new RpcClient();
         await rpcClient.StartAsync();
 
-        Console.WriteLine(" [req] Requesting Saturn service work", data);
+        Console.WriteLine(" [req] Requesting Saturn service work: {0}", data);
         var response = await rpcClient.CallAsync(data);
         Console.WriteLine($" [res] Got {response}");
     }
