@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipelineAppsSun", "PipelineAppsSun.csproj", "{970A3A76-0217-4596-9C4B-5C3E060DAFC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipelineAppSun", "PipelineAppSun.csproj", "{970A3A76-0217-4596-9C4B-5C3E060DAFC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

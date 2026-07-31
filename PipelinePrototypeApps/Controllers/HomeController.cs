@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using PipelineAppsSun.Models;
+using PipelineAppSun.Models;
 
-namespace PipelineAppsSun.Controllers;
+namespace PipelineAppSun.Controllers;
 
 public class HomeController : Controller
 {

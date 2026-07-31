@@ -1,4 +1,4 @@
-namespace PipelineAppsSun.Models;
+namespace PipelineAppSun.Models;
 
 public class ErrorViewModel
 {
