@@ -1,15 +1,17 @@
-namespace PipelineAppsSun;
 
-public static class WorkSaturn
+namespace PipelineAppSun
 {
-    public static async Task InvokeAsyncWork()
+    public static class WorkSaturn
     {
-        string data = "Hello World";
-        var rpcClient = new RpcClient();
-        await rpcClient.StartAsync();
+        public static async Task<string> InvokeAsyncWork(string data)
+        {
+            var rpcClient = new RpcClient();
+            await rpcClient.StartAsync();
 
-        Console.WriteLine(" [req] Requesting Saturn service work: {0}", data);
-        var response = await rpcClient.CallAsync(data);
-        Console.WriteLine($" [res] Got {response}");
+            Console.WriteLine(" [req] Requesting Saturn service work: {0}", data);
+            var response = await rpcClient.CallAsync(data);
+            Console.WriteLine($" [res] Got {response}");
+            return response;
+        }
     }
 }

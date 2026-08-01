@@ -1,15 +1,32 @@
-namespace PipelineAppsSun;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
+namespace PipelineAppSun;
 
-public class Program
+
+public static class Program
 {
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
         
         builder.Services.AddControllersWithViews();
+        builder.Services.AddControllers();
 
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+        
+        builder.WebHost.ConfigureKestrel((context, serverOptions) =>
+        {
+            var kestrelSection = context.Configuration.GetSection("Kestrel");
+
+            serverOptions.Configure(kestrelSection)
+                .Endpoint("HTTPS", endpointConfig =>
+                {
+                    endpointConfig.ListenOptions.UseHttps(httpsOptions =>
+                    {
+                        httpsOptions.SslProtocols = System.Security.Authentication.SslProtocols.Tls12 | System.Security.Authentication.SslProtocols.Tls13;
+                    });
+                });
+        });
+        
         var app = builder.Build();
         
         if (!app.Environment.IsDevelopment())
@@ -21,16 +38,15 @@ public class Program
         app.UseHttpsRedirection();
         app.UseRouting();
 
-        app.UseAuthorization();
+        //app.UseAuthorization();
 
-        app.MapStaticAssets();
-
-        app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
-            .WithStaticAssets();
-
-        _ = WorkSaturn.InvokeAsyncWork();
+        //app.MapStaticAssets();
+        
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
         
         app.Run();
     }

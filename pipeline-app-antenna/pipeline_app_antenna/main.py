@@ -11,8 +11,9 @@ def main():
     #    while True:
             sleep(randint(1,10))
             random_input = ''.join(secrets.choice(string.digits + "XE") for _ in range(INPUT_LENGTH))
-            do_work = RequestWork("http://localhost:5201/workfromsaturn")
+            do_work = RequestWork("http://localhost:5201/worksaturn")
             do_work.send_work(random_input)
+            #check result to see if it valid
     #except KeyboardInterrupt: #want SIGINT to kill gracefully 
     #    pass
 
