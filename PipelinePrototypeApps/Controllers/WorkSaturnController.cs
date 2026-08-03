@@ -25,23 +25,23 @@ public class WorkSaturnController : ControllerBase
         }
 
         string result = await WorkSaturn.InvokeAsyncWork(request);
-        Console.WriteLine($"Work result: {result}");
+        Console.WriteLine($"Amount of attempts: {result}");
 
         return Ok(result);
     }
 
     // GET api/WorkSaturn
-    [HttpGet]
-    public IActionResult Get()
-    {
-        var items = new[] { "hash1", "hash2", "hash3" };
-        return Ok(items);
-    }
+    //[HttpGet]
+    //public IActionResult Get()
+    //{
+    //    var items = new[] { "hash1", "hash2", "hash3" };
+    //    return Ok(items);
+    //}
 
     // GET api/WorkSaturn/5
-    [HttpGet("[action]/{id:int}")]
-    public IActionResult Get(int id)
-    {
-        return Ok(new { Id = id, Value = $"hash{id}" });
-    }
+    //[HttpGet("[action]/{id:int}")]
+    //public IActionResult Get(int id)
+    //{
+    //    return Ok(new { Id = id, Value = $"hash{id}" });
+    //}
 }

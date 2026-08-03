@@ -12,4 +12,4 @@ class RequestWork:
         message = '"' + input + '"' #need to send a JSON string body
         print(f"POST request: {self.api_url}/{message}")
         response = requests.post(self.api_url, json=message, headers={    "Accept": "application/json", "Content-Type": "application/json"}, timeout=30)
-        print(f"Response: solved hash - {response.text}")
+        print(f"Response: amount of attempts to solve - {response.text}")
