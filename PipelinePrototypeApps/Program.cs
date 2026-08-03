@@ -7,9 +7,7 @@ public static class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         
-        builder.Services.AddControllersWithViews();
         builder.Services.AddControllers();
-
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         
@@ -29,6 +27,8 @@ public static class Program
         
         var app = builder.Build();
         
+        app.MapControllers();
+        
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Home/Error");
@@ -39,8 +39,6 @@ public static class Program
         app.UseRouting();
 
         //app.UseAuthorization();
-
-        //app.MapStaticAssets();
         
         if (app.Environment.IsDevelopment())
         {

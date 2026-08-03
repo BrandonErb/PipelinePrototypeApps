@@ -23,6 +23,9 @@ async function main() {
     channel.prefetch(1);
     console.log(' [x] Awaiting RPC requests');
     channel.consume(queue, function reply(msg) {
+        if (!msg){
+            return;
+        }
         const message = msg.content
 
         console.log("[rec] data: %s", message);
@@ -30,6 +33,7 @@ async function main() {
         const work = new WorkHash(16);
         const result = work.grindWork(message);
         const response = result.hash
+        console.log("Found Hash!");
 
         channel.sendToQueue(msg.properties.replyTo,
             Buffer.from(response.toString()), {
@@ -37,8 +41,8 @@ async function main() {
             });
 
         channel.ack(msg);
+        console.log("Waiting for new work");
     });
-    console.log("Found Hash!");
 }
 
 

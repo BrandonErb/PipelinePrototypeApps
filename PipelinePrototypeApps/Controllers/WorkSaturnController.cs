@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,24 +10,27 @@ public class WorkSaturnController : ControllerBase
 {
     // POST api/items
     [HttpPost]
-    public IActionResult Post([FromBody] string request)
+    public async Task<IActionResult> Post([FromBody] string requestJson)
     {
-        var duodecimalRegex = new Regex(@"^[\dxXeE]{12}$");
-        if (!(request.Length < 1)|| request.IsWhiteSpace())
+        Console.WriteLine($"Request as string: {requestJson}");
+        string? request = JsonSerializer.Deserialize<string>(requestJson);   
+        if (requestJson.Length < 1 || request == null)
         {
             return BadRequest("Input is required.");
         }
+        var duodecimalRegex = new Regex(@"^[0-9xXeE]{12}$");
         if (!duodecimalRegex.IsMatch(request))
         {
             return BadRequest("Input is not a 12 digit duodecimal number.");
         }
-        
-        string result = WorkSaturn.InvokeAsyncWork(request).GetAwaiter().GetResult();
-        
-        return CreatedAtAction(nameof(Get), new { id = 1 }, result); //need to handle the identifiers of each work call
+
+        string result = await WorkSaturn.InvokeAsyncWork(request);
+        Console.WriteLine($"Work result: {result}");
+
+        return Ok(result);
     }
-    
-    // GET api/items
+
+    // GET api/WorkSaturn
     [HttpGet]
     public IActionResult Get()
     {
@@ -34,7 +38,7 @@ public class WorkSaturnController : ControllerBase
         return Ok(items);
     }
 
-    // GET api/items/5
+    // GET api/WorkSaturn/5
     [HttpGet("[action]/{id:int}")]
     public IActionResult Get(int id)
     {
