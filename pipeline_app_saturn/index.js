@@ -30,10 +30,10 @@ async function main() {
 
         console.log("[rec] data: %s", message);
 
-        const work = new WorkHash(16);
+        const work = new WorkHash(20);
         const result = work.grindWork(message);
-        const response = result.hash
-        console.log("Found Hash!");
+        const response = result.nonce
+        console.log("Solved Hash!");
 
         channel.sendToQueue(msg.properties.replyTo,
             Buffer.from(response.toString()), {

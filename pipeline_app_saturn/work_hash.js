@@ -34,13 +34,13 @@ export default class WorkHash {
         while (true) {
             const attempt = `${this.input}${nonce}`;
             const hash = keccak256(attempt);
-            console.log(`Solve attempt: ${hash}`)
+            console.log(`Solve attempt: ${nonce}:{hash}`)
             if (this.countLeadingZeroBits(hash) >= this.difficultyBits) {
-                return { nonce, hash };
+                console.log(`Solved on nonce: ${nonce}`)
+                return { nonce, hash }; //Hash is meaningless as it is always the same for each difficulty with current code
             }
 
             nonce++;
         }
-        console.log(`Solved on nonce: ${nonce}`)
     }
 }
