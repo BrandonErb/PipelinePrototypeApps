@@ -5,7 +5,7 @@ import WorkHash from "./work_hash.js";
 
 async function main() {
     const connection = await amqp.connect({
-        hostname: "localhost",
+        hostname: "host.docker.internal",
         port: 5672,
         username: "user",
         password: "password",

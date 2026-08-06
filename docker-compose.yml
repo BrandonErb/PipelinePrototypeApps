@@ -1,0 +1,35 @@
+services:
+  server:
+    build:
+      context: ./PipelinePrototypeApps
+      dockerfile: Dockerfile
+    networks:
+      - pipelinenet
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
+  worker-saturn:
+    build:
+      context: ./pipeline_app_saturn
+      dockerfile: Dockerfile
+    depends_on:
+      server:
+        condition: service_started
+    networks:
+      - pipelinenet
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
+  frontend-antenna:
+    build:
+      context: ./pipeline-app-antenna
+      dockerfile: Dockerfile
+    depends_on:
+      worker-saturn:
+        condition: service_started
+    networks:
+      - pipelinenet
+
+networks:
+  pipelinenet:
+    driver: bridge

@@ -23,7 +23,7 @@ namespace PipelineAppSun
         {
             _connectionFactory = new ConnectionFactory
             {
-                HostName = "localhost",
+                HostName = "host.docker.internal",
                 Port = 5672,
                 UserName = "user",
                 Password = "password"

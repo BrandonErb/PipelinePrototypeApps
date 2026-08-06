@@ -14,7 +14,7 @@ async def main():
         while True:
             await asyncio.sleep(randint(DELAY_MIN, DELAY_MAX)) #Allow queue to clear if any messages are stuck
             random_input = ''.join(secrets.choice(string.digits + "XE") for _ in range(INPUT_LENGTH))
-            do_work = RequestWork("http://localhost:5201/api/worksaturn")
+            do_work = RequestWork("http://server:5201/api/worksaturn")
 
             task = asyncio.create_task(do_work.send_work(random_input))
             tasks.add(task)
